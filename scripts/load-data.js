@@ -52,4 +52,4 @@ document.addEventListener('scroll', function (e) {
 
     xhr.send();
   }
-})
+});
