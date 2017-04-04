@@ -1,31 +1,43 @@
-var logo = document.querySelector('.center img');
-var startPosition = {
-	top: 0,
-	left: 0
-};
-var lastPosition = {
-	top: 0,
-	left: 0
-};
-var isMoving = false;
+function DragAndDrop(node) {
+	this.node = node;
+	this.startPosition = {
+		top: 0,
+		left: 0
+	};
+	this.lastPosition = {
+		top: 0,
+		left: 0
+	};
+	this.isMoving = false;
 
-logo.addEventListener('mousedown', function(e) {
-	isMoving = true;
-	startPosition.top = e.clientY;
-	startPosition.left = e.clientX;
-});
+	this.bindedMouseDownHandler = this.mouseDownHandler.bind(this);
+	this.bindedMouseMoveHandler = this.mouseMoveHandler.bind(this);
+	this.bindedMouseUpHandler = this.mouseUpHandler.bind(this);
 
-document.body.addEventListener('mousemove', function(e) {
-	e.preventDefault();
-	if(isMoving)
-	{
-		logo.style.transform = 'translate(' + (e.clientX + lastPosition.left - startPosition.left) +'px, ' +
-		(e.clientY + lastPosition.top - startPosition.top) +'px)';
+	this.node.addEventListener('mousedown', this.bindedMouseDownHandler);
+	document.body.addEventListener('mousemove', this.bindedMouseMoveHandler);
+	document.body.addEventListener('mouseup', this.bindedMouseUpHandler);
+}
+
+DragAndDrop.prototype = {
+	mouseDownHandler: function(e) {
+		this.isMoving = true;
+		this.startPosition.top = e.clientY;
+		this.startPosition.left = e.clientX;
+	},
+	mouseMoveHandler: function(e) {
+		e.preventDefault();
+		if(this.isMoving)
+		{
+			this.node.style.transform = 'translate(' + (e.clientX + this.lastPosition.left - this.startPosition.left) +'px, ' +
+			(e.clientY + this.lastPosition.top - this.startPosition.top) +'px)';
+		}
+	},
+	mouseUpHandler: function(e) {
+		this.isMoving = false;
+		this.lastPosition.top += e.clientY - this.startPosition.top;
+		this.lastPosition.left += e.clientX - this.startPosition.left;
 	}
-});
+}
 
-logo.addEventListener('mouseup', function(e) {
-	isMoving = false;
-	lastPosition.top += e.clientY - startPosition.top;
-	lastPosition.left += e.clientX - startPosition.left;
-});
+var logo = new DragAndDrop(document.querySelector('.center img'));
