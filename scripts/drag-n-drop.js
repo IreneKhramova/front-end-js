@@ -1,3 +1,4 @@
+define(function () {
 var logo = document.querySelector('.center img');
 var startPosition = {
 	top: 0,
@@ -28,4 +29,5 @@ logo.addEventListener('mouseup', function(e) {
 	isMoving = false;
 	lastPosition.top += e.clientY - startPosition.top;
 	lastPosition.left += e.clientX - startPosition.left;
+});
 });
