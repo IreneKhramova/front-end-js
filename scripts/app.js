@@ -1,3 +1,3 @@
-require(['./scripts/load-data.js', './scripts/fixed-menu.js', './scripts/drag-n-drop.js'], function () {
-	console.log('loaded');
-});
+require('./load-data.js');
+require('./fixed-menu.js');
+require('./drag-n-drop.js');

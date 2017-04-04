@@ -1,4 +1,3 @@
-define(function () {
 var menu = document.querySelector('.menu');
 var menuHeight = menu.offsetHeight;
 var goods = document.querySelector(".goods");
@@ -16,5 +15,4 @@ document.addEventListener('scroll', function (e) {
         menu.classList.remove('scrolled');
         goods.style.paddingTop = "";
     }
-});
 });

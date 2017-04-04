@@ -1,4 +1,3 @@
-define(function () {
 var elements = document.querySelector('.elements');
 var busy = false;
 
@@ -55,5 +54,4 @@ document.addEventListener('scroll', function (e) {
 
     xhr.send();
   }
-});
 });
